@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from series_pagadas.models import Serie_pagada
+
+admin.site.register(Serie_pagada)

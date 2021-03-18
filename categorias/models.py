@@ -1,5 +1,8 @@
 from django.db import models
 
+from peliculas.models import Pelicula
+from peliculas_pagadas.models import Pelicula_pagada
+
 
 class Categoria(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)

@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'series.apps.SeriesConfig',
     'peliculas_pagadas.apps.PeliculasPagadasConfig',
     'series_pagadas.apps.SeriesPagadasConfig',
-    'espacios.apps.EspaciosConfig'
+    'espacios.apps.EspaciosConfig',
+    'categorias.apps.CategoriasConfig',
+    # Django-rest
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -84,8 +87,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'clonvideo',
-        'USER': 'postgresql',
-        'password': '12345',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -129,3 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

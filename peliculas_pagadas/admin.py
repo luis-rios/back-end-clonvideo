@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from peliculas_pagadas.models import Pelicula_pagada
+
+admin.site.register(Pelicula_pagada)
