@@ -8,7 +8,7 @@ class Usuario(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=100, blank=False, null=False)
 
-    space = models.ForeignKey(Espacio, related_name="Usuario", on_delete=models.CASCADE)
+    space = models.OneToOneField(Espacio, related_name="Usuario", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

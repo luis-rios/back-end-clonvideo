@@ -5,5 +5,5 @@ from series_pagadas.models import Serie_pagada
 
 class Serie_pagadaSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Serie_pagada
-        fields: '__all__'
+        model = Serie_pagada
+        fields = '__all__'

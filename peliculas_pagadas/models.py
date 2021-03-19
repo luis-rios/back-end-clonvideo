@@ -1,5 +1,7 @@
 from django.db import models
 
+from categorias.models import Categoria
+
 
 class Pelicula_pagada(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
@@ -16,6 +18,8 @@ class Pelicula_pagada(models.Model):
     buy = models.IntegerField()
     direction = models.CharField(max_length=100, blank=False, null=False)
     distribution = models.CharField(max_length=200, blank=False, null=False)
+
+    categories = models.ManyToManyField(Categoria, related_name="Pelicula_pagada")
 
     def __str__(self):
         return self.name

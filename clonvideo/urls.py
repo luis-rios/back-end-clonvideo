@@ -24,5 +24,6 @@ urlpatterns = [
     path('series/', include(r'series.urls')),
     path('peliculas/', include(r'peliculas.urls')),
     path('series_pagadas/', include(r'series_pagadas.urls')),
-    path('peliculas_pagadas/', include(r'peliculas_pagadas.urls'))
+    path('peliculas_pagadas/', include(r'peliculas_pagadas.urls')),
+    path('categorias/', include(r'categorias.urls'))
 ]
