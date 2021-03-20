@@ -9,11 +9,27 @@ from peliculas.serializers import PeliculaSerializer
 from peliculas_pagadas.serializers import Pelicula_pagadaSerializer
 from series.serializers import SerieSerializer
 from series_pagadas.serializers import Serie_pagadaSerializer
+from rest_framework.pagination import PageNumberPagination
 
+#Poder ver la listas de series , series  pagadas, peliculas y peliculas pagadas y ver su categoria#
 
 class EspacioViewSet(viewsets.ModelViewSet):
     queryset = Espacio.objects.all()
     serializer_class = EspacioSerializer
+    pagination_class = PageNumberPagination
+
+    # paginacion y busqueda
+    def get_queryset(self):
+        query = {}
+        for item in self.request.query_params:
+            if item not in ['page_size']:
+                continue
+                if item in ['peliculas', 'series','peliculas_pagadas','series_pagadas']:
+                    query[item + '__id'] = self.request.query_params[item]
+                    continue
+                query[item + '__icontains'] = self.request.query_params[item]
+        self.queryset = self.queryset.filter(**query)
+        return super().get_queryset()
 
     @action(methods=["GET", "POST", "DELETE"], detail=True)
     def series(self, request, pk=None):
@@ -37,9 +53,12 @@ class EspacioViewSet(viewsets.ModelViewSet):
                 espacio.serie.remove(serie)
                 return Response(status=status.HTTP_204_NO_CONTENT)
 
+    # Visualizar las peliculas
     @action(methods=["GET", "POST", "DELETE"], detail=True)
     def peliculas(self, request, pk=None):
         espacio = self.get_object()
+
+
 
         if request.method == "GET":
             serializer = PeliculaSerializer(espacio.movie, many=True)
@@ -58,6 +77,8 @@ class EspacioViewSet(viewsets.ModelViewSet):
                 pelicula = Espacio.objects.all(id=int(pelicula_id))
                 espacio.pelicula.remove(pelicula)
                 return Response(status=status.HTTP_204_NO_CONTENT)
+
+            # Visualizar las peliculas_pagadas
 
     @action(methods=["GET", "POST", "DELETE"], detail=True)
     def series_pagadas(self, request, pk=None):
@@ -84,6 +105,8 @@ class EspacioViewSet(viewsets.ModelViewSet):
     @action(methods=["GET", "POST", "DELETE"], detail=True)
     def peliculas_pagadas(self, request, pk=None):
         espacio = self.get_object()
+
+
 
         if request.method == "GET":
             serializer = Pelicula_pagadaSerializer(espacio.paid_movie, many=True)

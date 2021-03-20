@@ -49,6 +49,14 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_SCHEMA_CLASS':'rest_framework.schemas.coreapi.AutoSchema'
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,12 +91,22 @@ WSGI_APPLICATION = 'clonvideo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'clonvideo',
+#         'USER': 'postgres',
+#         'PASSWORD': '12345',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+DATABASE ={
+    'default':{
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'clonvideo',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': 'bathorya2',
         'HOST': 'localhost',
         'PORT': '5432'
     }
